@@ -1,7 +1,10 @@
 site_name: My Docs
+site_url: https://pykampala-community.github.io
 theme:
   name: material
   custom_dir: overrides
+  palette:
+    primary: black
 plugins:
   - blog:
-    blog_dir: .
+      blog_dir: .
