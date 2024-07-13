@@ -1,4 +1,4 @@
-site_name: My Docs
+site_name: Blog
 site_url: https://pykampala-community.github.io
 theme:
   name: material
@@ -8,3 +8,12 @@ theme:
 plugins:
   - blog:
       blog_dir: .
+      categories: true
+      categories_allowed:
+        - Tutorial
+        - Benchmark
+        - Performance
+        - Data
+        - Ai
+        - Project
+        - General
