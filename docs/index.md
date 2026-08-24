@@ -15,7 +15,7 @@ We host **physical and virtual meetups every last Saturday of the month**. This 
 
 The newest articles appear first. Each card shows **title, author, date, abstract**, and a link to read the full post.
 
-> Want to contribute? See [How to write a blog post](posts/2024-07-13-writing-a-blogpost.md) and our [`content/blog/_template.md`](https://github.com/Pykampala-Community/blogs/blob/main/content/blog/_template.md) • Abstract ≤ 1024 chars • File naming `YYYY-MM-DD-slug.md`
+> Want to contribute? See our [`content/blog/_template.md`](https://github.com/Pykampala-Community/blogs/blob/main/content/blog/_template.md) and [example post](posts/2026-08-25-building-python-projects.md) • Abstract ≤ 1024 chars • File naming `YYYY-MM-DD-slug.md`
 
 ## Community
 
