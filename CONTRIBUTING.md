@@ -75,7 +75,7 @@ Add to front matter:
 comments: true
 ```
 
-This enables the Giscus comment section at the bottom of your post (white background, `data-theme="light"` for legibility). Readers comment with their GitHub account via `Pykampala-Community/discussions` (see `overrides/partials/comments.html`). No extra setup needed — just set `comments: true`.
+This enables the Giscus comment section at the bottom of your post (white background, `data-theme="light"` for legibility). Readers comment with their GitHub account via `Pykampala-Community/blogs` Discussions (see `overrides/partials/comments.html`). No extra setup needed — just set `comments: true`.
 
 ## 3. Write Content in Markdown
 
