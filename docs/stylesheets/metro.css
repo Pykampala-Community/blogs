@@ -15,11 +15,17 @@
   --brand-surface-alt: #F8F8F6;
   --brand-surface-muted: #F2F2F0;
   --brand-border: #E8E8E6;
-  --text-primary: #121212;
-  --text-secondary: #4A4A4F;
-  --text-muted: #6B6B72;
+  --text-primary: #000000;
+  --text-secondary: #1a1a1a;
+  --text-muted: #333333;
   --radius-sm: 2px;
   --max-width: 1160px;
+}
+
+/* Force legible white background / black font — overrides Material dark schemes */
+html, body, .md-main, .md-main__inner, .md-content, .md-typeset, .md-nav, .md-sidebar, .md-container {
+  background: #ffffff !important;
+  color: #000000 !important;
 }
 
 /* Top banner — Back to main site */

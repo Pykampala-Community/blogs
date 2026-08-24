@@ -10,20 +10,9 @@ theme:
   name: material
   custom_dir: overrides
   palette:
-    - media: "(prefers-color-scheme)"
-      scheme: default
+    - scheme: default
       primary: black
       accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
   features:
     - navigation.tabs
     - navigation.sections
@@ -90,5 +79,4 @@ extra_css:
   - stylesheets/metro.css
 
 extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
