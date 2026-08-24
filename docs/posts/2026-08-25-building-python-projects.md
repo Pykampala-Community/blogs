@@ -4,6 +4,7 @@ author: Jane Doe
 title: Building Python Projects with Purpose
 abstract: "A practical guide to structuring Python projects for maintainability, testing,\
   \ and collaboration \u2014 from project layout to packaging and CI."
+comments: true
 authors:
 - Jane-Doe
 ---
