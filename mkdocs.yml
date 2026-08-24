@@ -1,14 +1,50 @@
-site_name: Blog
-site_url: https://pykampala-community.github.io
+site_name: PyKampala Community Blog
+site_url: https://pykampala-community.github.io/blogs/
+site_description: Technical and community stories from PyKampala — Python developers in Uganda. Established 2016.
+site_author: PyKampala Community
+repo_url: https://github.com/Pykampala-Community/blogs
+repo_name: Pykampala-Community/blogs
+edit_uri: edit/main/docs/
+
 theme:
   name: material
   custom_dir: overrides
   palette:
-    primary: black
+    - media: "(prefers-color-scheme)"
+      scheme: default
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.footer
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+
 plugins:
+  - search
   - blog:
-      blog_dir: .
-      categories: true
+      blog_dir: posts
+      blog_toc: true
+      post_date_format: full
+      post_url_date_format: yyyy/MM
+      post_url_format: "{date}/{slug}"
       categories_allowed:
         - Tutorial
         - Benchmark
@@ -17,3 +53,42 @@ plugins:
         - Ai
         - Project
         - General
+      pagination: true
+  - tags
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Pykampala-Community
+      name: GitHub
+    - icon: fontawesome/brands/meetup
+      link: https://www.meetup.com/pykampala/
+      name: Meetup
+  version:
+    provider: mike
+
+extra_css:
+  - stylesheets/metro.css
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

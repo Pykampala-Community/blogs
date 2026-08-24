@@ -1,11 +1,15 @@
 ---
-comments: true
 date: 2024-07-13
+author: Toe•bias
 authors:
-    - Toebias-HT
+  - Toebias-HT
+title: Writing a Blog Post for Pykampala
+abstract: Learn how to contribute a blog post to the PyKampala community blog using MkDocs Material — front matter, writing tips, images, and the GitHub PR workflow.
+comments: true
 categories:
-    - Tutorial
+  - Tutorial
 ---
+
 ![image](https://raw.githubusercontent.com/Pykampala-Community/assets/main/pykampala4.png)
 
 ## Welcome to Pykampala's community blog
@@ -14,7 +18,7 @@ Welcome to the python kampala community blog. In this blog post, I share how to 
 your blog post to this community channel.
 </b>
 <!-- more -->
-To start with, I'm excited that we've set up our first blog channel. This is the first milestone 
+
 to building our web presence. We've previously been more active on our Whatsapp platform as with other
 Ugandan communities. Attempts to adopt other platforms such as telegram and discord have failed for varying reasons.
 This is however a next step to open up our community engagement beyond the limited whatsapp platform.
