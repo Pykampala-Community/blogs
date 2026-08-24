@@ -4,10 +4,10 @@
   <p style="color:#333; font-size:0.9rem; margin: 0 0 12px;">
     Join the discussion — comment with your GitHub account. Powered by <a href="https://giscus.app" target="_blank" rel="noopener">Giscus</a> &amp; GitHub Discussions in <a href="https://github.com/Pykampala-Community/blogs/discussions" target="_blank" rel="noopener">Pykampala-Community/blogs</a>.
   </p>
-  <div class="giscus" style="background:#fff; border:1px solid #E8E8E6; border-radius:2px; padding:12px; min-height: 100px;">
-    <p style="color:#6B6B72; font-size:0.85rem; text-align:center; margin:0; padding: 20px 0;">
+  <div class="giscus" id="__giscus" style="background:#fff; border:1px solid #E8E8E6; border-radius:2px; padding:12px; min-height: 100px;">
+    <p id="__giscus-loading" style="color:#6B6B72; font-size:0.85rem; text-align:center; margin:0; padding: 20px 0;">
       Loading comments…<br>
-      <small>If comments don’t load, ensure you’re signed into GitHub and that the <a href="https://github.com/apps/giscus" target="_blank" rel="noopener">giscus app</a> is installed for this repository. You can also <a href="https://github.com/Pykampala-Community/blogs/discussions" target="_blank" rel="noopener">view discussions directly</a>.</small>
+      <small>If this stays here, <a href="https://github.com/apps/giscus" target="_blank" rel="noopener">install the giscus app</a> for <code>Pykampala-Community/blogs</code> (needs org admin) and ensure <a href="https://github.com/Pykampala-Community/blogs/discussions" target="_blank" rel="noopener">Discussions</a> are enabled with <code>General</code> category. You can also <a href="https://github.com/Pykampala-Community/blogs/discussions" target="_blank" rel="noopener">view discussions directly</a>.</small>
     </p>
   </div>
   <script src="https://giscus.app/client.js"
@@ -25,6 +25,29 @@
           data-loading="lazy"
           crossorigin="anonymous"
           async>
+  </script>
+  <script>
+    // Helpful fallback: if giscus fails to create a discussion, show a direct link
+    // Giscus posts a message when it fails; we listen and surface a hint
+    window.addEventListener('message', function(event) {
+      if (event.origin !== 'https://giscus.app') return;
+      if (!event.data || !event.data.giscus) return;
+      // Giscus error event contains { giscus: { error: ... } } when it cannot create a discussion
+      if (event.data.giscus.error) {
+        var el = document.getElementById('__giscus-loading');
+        if (el) {
+          el.innerHTML = '<span style="color:#b00020;">Giscus could not create a discussion for this page.</span><br><small>Common fixes: (1) <a href="https://github.com/apps/giscus" target="_blank">install giscus</a> for <code>Pykampala-Community/blogs</code>, (2) enable Discussions in repo Settings → General → Features, (3) verify category <code>General</code> exists. Or <a href="https://github.com/Pykampala-Community/blogs/discussions/new?category=General" target="_blank">start a discussion manually</a>.</small>';
+        }
+      }
+    });
+    // Also clear loading text once giscus loads successfully (it replaces the div)
+    setTimeout(function() {
+      var frame = document.querySelector('.giscus-frame');
+      if (frame) {
+        var loading = document.getElementById('__giscus-loading');
+        if (loading) loading.style.display = 'none';
+      }
+    }, 4000);
   </script>
   <noscript>
     <p style="color:#6B6B72; font-size:0.9rem; background:#FFFDE7; border:1px solid #E8E8E6; padding:12px; border-radius:2px;">
