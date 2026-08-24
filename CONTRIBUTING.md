@@ -77,6 +77,11 @@ comments: true
 
 This enables the Giscus comment section at the bottom of your post (white background, `data-theme="light"` for legibility). Readers comment with their GitHub account via `Pykampala-Community/blogs` Discussions (see `overrides/partials/comments.html`). No extra setup needed — just set `comments: true`.
 
+> **Troubleshooting “giscus unable to create discussion”:** Giscus requires the **giscus GitHub App** to be installed for the target repo and **Discussions enabled**.
+> 1. Install/check at **https://github.com/apps/giscus** → Configure → *Pykampala-Community* → select `blogs` (and grant *Discussions: Read & write*).
+> 2. In repo **Settings → General → Features**, ensure **Discussions** is checked.
+> 3. Verify category `General` (`DIC_kwDOMANU_M4DEHUm`) exists in **https://github.com/Pykampala-Community/blogs/discussions/categories** — giscus creates a Discussion per `pathname` on first comment. If the app was just installed, wait ~1 min and hard-refresh the post. As fallback, commenters can still use **[View discussions directly](https://github.com/Pykampala-Community/blogs/discussions)**.
+
 ## 3. Write Content in Markdown
 
 Below front matter, write normal Markdown:
