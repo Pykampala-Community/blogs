@@ -3,6 +3,9 @@ date: YYYY-MM-DD
 author: Your Name
 title: Your Blog Post Title
 abstract: Your short post summary. Maximum 1024 characters.
+categories:
+  - Programming
+  - Software
 comments: true
 ---
 

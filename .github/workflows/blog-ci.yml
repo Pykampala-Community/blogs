@@ -45,6 +45,9 @@ jobs:
       - name: Sync blog posts (content/blog -> docs/posts)
         run: python scripts/sync-blog.py
 
+      - name: Generate category pages
+        run: python scripts/generate-categories.py
+
       - name: Validate blog posts
         run: |
           python scripts/validate_blog_posts.py

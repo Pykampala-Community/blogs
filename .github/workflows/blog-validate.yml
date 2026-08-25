@@ -37,6 +37,9 @@ jobs:
       - name: Sync blog posts
         run: python scripts/sync-blog.py
 
+      - name: Generate category pages
+        run: python scripts/generate-categories.py
+
       - name: Validate front matter & abstract length
         run: |
           python scripts/validate_blog_posts.py

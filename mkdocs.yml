@@ -35,13 +35,14 @@ plugins:
       post_url_date_format: yyyy/MM
       post_url_format: "{date}/{slug}"
       categories_allowed:
-        - Tutorial
-        - Benchmark
-        - Performance
-        - Data
-        - Ai
-        - Project
-        - General
+        - Web
+        - AI and Machine-Learning
+        - Data Science
+        - Cyber Security
+        - Programming
+        - Career
+        - Graphics
+        - Software
       pagination: true
   - tags
 

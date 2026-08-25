@@ -9,8 +9,9 @@ Live blog: **https://pykampala-community.github.io/blogs/** • Main site: **htt
 
 - **Blog index** `/` — Metro grid of cards (title, author, date, abstract) sorted newest-first, responsive, `← Back to PyKampala Community`
 - **Post pages** `/{date}/{slug}/` — title, author, date, abstract, Markdown content with code highlighting, `← Back to Blog` + `← Back to PyKampala Community`
-- **Markdown-first** — posts in `content/blog/` as `YYYY-MM-DD-slug.md` with front matter `date/author/title/abstract` (abstract ≤1024)
-- **Auto-generation** — index and post pages derived from Markdown; merging PR publishes automatically
+- **Categories** — `categories` front matter (array), 8 supported categories, browsable at `/categories/` and `/categories/<slug>/` (e.g. `/categories/programming/`), clickable tags on posts, posts in multiple categories appear in each
+- **Markdown-first** — posts in `content/blog/` as `YYYY-MM-DD-slug.md` with front matter `date/author/title/abstract/categories` (abstract ≤1024)
+- **Auto-generation** — index, post pages, and category pages derived from Markdown; merging PR publishes automatically
 - **RSS** `feed_rss_created.xml` / `feed_rss_updated.xml` (Material blog `rss: true`)
 - **SEO** — title/description from abstract, Open Graph, canonical `site_url`
 - **Accessibility** — semantic HTML, heading hierarchy, keyboard focus, contrast, alt text
@@ -27,8 +28,9 @@ pip install pyyaml markdown pytest  # validation & tests
 cp content/blog/_template.md content/blog/2026-08-25-my-post.md
 # Edit front matter + Markdown
 
-# Sync (content/blog → docs/posts) + validate + test + build
+# Sync (content/blog → docs/posts), generate categories, validate + test + build
 python scripts/sync-blog.py
+python scripts/generate-categories.py
 python scripts/validate_blog_posts.py  # also: python scripts/validate-blog-posts.py
 pytest -v
 mkdocs serve          # http://127.0.0.1:8000/blogs/
@@ -45,6 +47,9 @@ date: YYYY-MM-DD
 author: Your Name
 title: Your Blog Post Title
 abstract: Your short summary. Maximum 1024 characters.
+categories:
+  - Programming
+  - Software
 ---
 
 # Your Blog Post Title
@@ -52,11 +57,31 @@ abstract: Your short summary. Maximum 1024 characters.
 Write your post here.
 ```
 
-Required: `date` (YYYY-MM-DD), `author`, `title`, `abstract` (≤1024). Validation fails with actionable error if missing/invalid/long.
+Required: `date` (YYYY-MM-DD), `author`, `title`, `abstract` (≤1024). Optional: `categories` (array of supported categories — see below). Validation fails with actionable error if missing/invalid/long.
 
 File naming: `YYYY-MM-DD-slug.md` (lowercase hyphens, e.g. `2026-08-25-building-python-projects.md`) → URL `/{date}/{slug}/`. Duplicate slugs fail validation.
 
 Example: `content/blog/2026-08-25-building-python-projects.md` (and synced to `docs/posts/`)
+
+### Categories
+
+Supported categories (extensible):
+
+`Web`, `AI and Machine-Learning`, `Data Science`, `Cyber Security`, `Programming`, `Career`, `Graphics`, `Software`
+
+Add to front matter:
+
+```yaml
+categories:
+  - AI and Machine-Learning
+  - Programming
+```
+
+- Single or multiple categories per post — post appears in each category listing
+- Slugs are URL-safe: `AI and Machine-Learning` → `ai-and-machine-learning` → `/categories/ai-and-machine-learning/`
+- Missing `categories` is allowed (post still renders); unknown categories warn gracefully; duplicate categories are deduped
+- Displayed as clickable tags at top of post (`> **Categories:** [Programming](../categories/programming.md)`) and on category pages
+- Browse at `/categories/` (lists all categories with counts) and `/categories/<slug>/` (e.g. `/categories/programming/`, `/categories/web/`)
 
 ## Images
 
@@ -82,7 +107,7 @@ Reference:
 python scripts/validate_blog_posts.py
 ```
 
-Checks: required fields, date valid, abstract ≤1024, filename convention, no duplicate slugs, markdown parseable. Errors are human-readable:
+Checks: required fields, date valid, abstract ≤1024, filename convention, no duplicate slugs, markdown parseable, **categories** (array, slug, unknown, duplicate handling). Errors are human-readable:
 
 ```
 Blog post validation failed:
@@ -97,7 +122,7 @@ PRs run this automatically (`.github/workflows/blog-validate.yml`).
 ## Tests
 
 ```bash
-pytest -v  # tests/test_blog_validation.py: front matter, abstract length, date, slug, discovery, sorting, duplicates
+pytest -v  # tests/test_blog_validation.py + tests/test_categories.py: front matter, abstract, date, slug, categories (single/multi, missing, unknown, duplicate, slug, filtering), discovery, sorting, duplicates
 ```
 
 ## Deployment
@@ -115,25 +140,32 @@ CI does this automatically on `push` to `main` (`.github/workflows/blog-ci.yml`)
 ├── content/blog/
 │   ├── _template.md
 │   ├── 2026-08-25-building-python-projects.md
+│   ├── 2026-08-26-ai-machine-learning-web.md  # categories: AI and Machine-Learning, Programming, Web
 │   └── assets/
 ├── docs/
 │   ├── index.md              # Blog landing (Metro hero)
 │   ├── posts/                # MkDocs source (synced from content/blog)
+│   ├── categories/           # Generated: categories.md + <slug>.md per category
+│   │   ├── categories.md     # /categories/ index
+│   │   ├── programming.md    # /categories/programming/
+│   │   └── ai-and-machine-learning.md
 │   ├── .authors.yml
-│   ├── stylesheets/metro.css # Metro UI override (reuses main site tokens)
+│   ├── stylesheets/metro.css # Metro UI + category tags
 │   └── requirements.txt
 ├── overrides/
 │   ├── main.html             # Top banner ← Back to PyKampala Community
 │   └── partials/comments.html
 ├── scripts/
 │   ├── sync-blog.py
-│   ├── validate_blog_posts.py  # also validate-blog-posts.py
+│   ├── generate-categories.py # builds docs/categories/** from content/blog categories
+│   ├── validate_blog_posts.py  # also validate-blog-posts.py (categories checks)
 ├── tests/
-│   └── test_blog_validation.py
-├── mkdocs.yml                # site_url, blog plugin, rss, seo, extra_css
+│   ├── test_blog_validation.py
+│   └── test_categories.py    # categories parsing, filtering, slugging, duplicates
+├── mkdocs.yml                # site_url, blog plugin (categories_allowed), rss, seo, extra_css
 ├── CONTRIBUTING.md
 └── .github/workflows/
-    ├── blog-ci.yml           # deploy on push to main
+    ├── blog-ci.yml           # deploy: sync → generate-categories → validate → pytest → build
     └── blog-validate.yml     # validate on PR
 ```
 

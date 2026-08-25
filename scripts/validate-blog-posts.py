@@ -33,8 +33,33 @@ REQUIRED_FIELDS = ["date", "title", "abstract"]
 # author is required but legacy uses authors list, we accept either
 AUTHOR_FIELDS = ["author", "authors"]
 
+# Supported categories — extensible; keep in sync with mkdocs.yml categories_allowed
+SUPPORTED_CATEGORIES = [
+    "Web",
+    "AI and Machine-Learning",
+    "Data Science",
+    "Cyber Security",
+    "Programming",
+    "Career",
+    "Graphics",
+    "Software",
+]
+# For backward compatibility: allow singular 'category' and handle case-insensitive matching
+CATEGORY_FIELDS = ["categories", "category"]
+
 FILENAME_RE = re.compile(r"^\d{4}-\d{2}-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 SLUG_RE = re.compile(r"^\d{4}-\d{2}-\d{2}-(.+)\.md$")
+
+def slugify_category(name: str) -> str:
+    """URL-safe slug: lowercased, spaces/underscores -> hyphens, keep alnum and hyphens"""
+    s = name.strip().lower()
+    s = re.sub(r"[\s_]+", "-", s)
+    s = re.sub(r"[^a-z0-9-]", "-", s)
+    s = re.sub(r"-+", "-", s)
+    return s.strip("-")
+
+def category_slug(name: str) -> str:
+    return slugify_category(name)
 
 def parse_frontmatter(text: str):
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", text, re.DOTALL)
@@ -101,6 +126,45 @@ def validate_file(path: pathlib.Path):
             errors.append(
                 f"abstract is {len(abstract)} characters long\n- maximum allowed length is 1,024 characters\n- please shorten the abstract and try again"
             )
+
+    # categories handling — supports 'categories' (array) and legacy singular 'category'
+    cats_raw = None
+    cats_field = None
+    for field in CATEGORY_FIELDS:
+        if field in data and data[field] is not None:
+            cats_raw = data[field]
+            cats_field = field
+            break
+    if cats_raw is not None:
+        # Normalize to list
+        if isinstance(cats_raw, str):
+            cats_list = [cats_raw]
+        elif isinstance(cats_raw, (list, tuple)):
+            cats_list = list(cats_raw)
+        else:
+            errors.append(f"categories field must be a list of strings, got {type(cats_raw).__name__}")
+            cats_list = []
+        # Validate each category
+        seen_lower = set()
+        for cat in cats_list:
+            if not isinstance(cat, str) or not cat.strip():
+                errors.append(f"invalid category '{cat}' — must be non-empty string")
+                continue
+            cat_stripped = cat.strip()
+            lower = cat_stripped.lower()
+            if lower in seen_lower:
+                warnings.append(f"duplicate category '{cat_stripped}' on this post — deduplicated")
+                continue
+            seen_lower.add(lower)
+            # unknown category — warn, not error (extensible)
+            supported_lower = [s.lower() for s in SUPPORTED_CATEGORIES]
+            if lower not in supported_lower:
+                warnings.append(
+                    f"unknown category '{cat_stripped}' — not in supported list {SUPPORTED_CATEGORIES}; handled gracefully but consider adding to SUPPORTED_CATEGORIES"
+                )
+        # Also warn if categories is not an array but single value was used via 'category' field
+        if cats_field == "category":
+            warnings.append("using singular 'category' field — prefer 'categories' (array) for consistency")
 
     # filename convention
     filename = path.name

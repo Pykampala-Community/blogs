@@ -4,10 +4,15 @@ author: Jane Doe
 title: Building Python Projects with Purpose
 abstract: "A practical guide to structuring Python projects for maintainability, testing,\
   \ and collaboration \u2014 from project layout to packaging and CI."
+categories:
+- Programming
+- Software
 comments: true
 authors:
 - Jane-Doe
 ---
+> **Categories:** [Programming](../categories/programming.md) • [Software](../categories/software.md)
+
 # Building Python Projects with Purpose
 
 ![PyKampala Community](https://raw.githubusercontent.com/Pykampala-Community/assets/main/pykampala4.png)

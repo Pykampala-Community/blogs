@@ -8,7 +8,17 @@ We host **physical and virtual meetups every last Saturday of the month**. This 
 
 <div style="display:flex; gap:12px; flex-wrap:wrap; margin: 20px 0;">
   <a href="posts/" class="md-button md-button--primary">Browse All Posts →</a>
+  <a href="categories/" class="md-button">Browse by Category →</a>
   <a href="https://pykampala-community.github.io/" class="md-button">← Back to PyKampala Community</a>
+</div>
+
+<div class="category-list" markdown>
+  <a href="categories/programming/" class="category-pill">Programming</a>
+  <a href="categories/web/" class="category-pill">Web</a>
+  <a href="categories/ai-and-machine-learning/" class="category-pill">AI and Machine-Learning</a>
+  <a href="categories/data-science/" class="category-pill">Data Science</a>
+  <a href="categories/cyber-security/" class="category-pill">Cyber Security</a>
+  <a href="categories/career/" class="category-pill">Career</a>
 </div>
 
 ## Latest Posts

@@ -3,8 +3,13 @@ date: 2026-08-25
 author: Jane Doe
 title: Building Python Projects with Purpose
 abstract: A practical guide to structuring Python projects for maintainability, testing, and collaboration — from project layout to packaging and CI.
+categories:
+  - Programming
+  - Software
 comments: true
 ---
+
+> **Categories:** [Programming](../categories/programming.md) • [Software](../categories/software.md)
 
 # Building Python Projects with Purpose
 
