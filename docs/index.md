@@ -13,7 +13,7 @@ We host **physical and virtual meetups every last Saturday of the month**. This 
 
 ## Latest Posts
 
-The newest articles appear first. Each card shows **title, author, date, abstract**, and a link to read the full post.
+The newest articles appear first. Read the preview of the blog and follow the link to read more.
 
 > Want to contribute? See our [`content/blog/_template.md`](https://github.com/Pykampala-Community/blogs/blob/main/content/blog/_template.md) and [example post](posts/2026-08-25-building-python-projects.md) • Abstract ≤ 1024 chars • File naming `YYYY-MM-DD-slug.md`
 
