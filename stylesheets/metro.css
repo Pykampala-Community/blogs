@@ -290,6 +290,40 @@ html, body, .md-main, .md-main__inner, .md-content, .md-typeset, .md-nav, .md-si
 .md-post__meta { color: var(--text-muted) !important; font-weight: 600; font-size: 0.78rem; }
 .md-post__meta a { color: var(--brand-accent); }
 
+/* Category tags — Metro pill, high contrast, clickable */
+.md-typeset .md-tag,
+.md-post__meta .md-tag,
+a.md-tag {
+  background: #fff !important;
+  color: #000 !important;
+  border: 1px solid var(--brand-border) !important;
+  border-left: 3px solid var(--brand-primary) !important;
+  border-radius: 2px !important;
+  padding: 2px 8px !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  margin: 2px 4px 2px 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+.md-typeset .md-tag:hover, a.md-tag:hover {
+  background: var(--brand-primary) !important;
+  color: #000 !important;
+  border-color: var(--brand-primary) !important;
+}
+.category-list {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0;
+}
+.category-pill {
+  background: #fff; color: #000; border: 1px solid #E8E8E6; border-left: 3px solid #F2E600;
+  border-radius: 2px; padding: 4px 10px; font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; display: inline-block;
+}
+.category-pill:hover { background: #F2E600; color: #000; }
+
 /* Back link visibility */
 .blog-back {
   display: inline-flex;
