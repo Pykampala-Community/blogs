@@ -77,8 +77,50 @@ html, body, .md-main, .md-main__inner, .md-content, .md-typeset, .md-nav, .md-si
 }
 .md-typeset h2 { border-bottom: 2px solid var(--brand-primary); display: inline-block; padding-bottom: 6px; }
 .md-typeset a { color: var(--brand-accent); }
-.md-typeset code { background: var(--brand-surface-muted); border-radius: 3px; }
-.md-typeset pre code { background: var(--brand-dark); color: #fff; }
+
+/* Code snippets — high-contrast, legible */
+.md-typeset code {
+  background: #f3f3f0 !important;
+  color: #1a1a1a !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 3px !important;
+  padding: 0.18em 0.38em !important;
+  font-family: 'Roboto Mono', 'SFMono-Regular', Consolas, monospace !important;
+  font-size: 0.84em !important;
+  font-weight: 600 !important;
+  word-break: break-word;
+}
+.md-typeset pre {
+  background: #121212 !important;
+  color: #f8f8f2 !important;
+  border: 1px solid #2a2a2a !important;
+  border-left: 4px solid var(--brand-primary) !important;
+  border-radius: 2px !important;
+  padding: 16px !important;
+  overflow-x: auto;
+  line-height: 1.6;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.md-typeset pre code {
+  background: transparent !important;
+  color: inherit !important;
+  border: none !important;
+  padding: 0 !important;
+  font-weight: 400 !important;
+  font-size: 0.88em !important;
+}
+/* Pygments / hljs tokens — high contrast on dark */
+.highlight .k, .highlight .kd, .highlight .kn { color: #569cd6 !important; } /* keyword */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb { color: #ce9178 !important; } /* string */
+.highlight .c, .highlight .c1, .highlight .cm { color: #6a9955 !important; font-style: italic; } /* comment - brighter */
+.highlight .nf, .highlight .fm { color: #dcdcaa !important; } /* function */
+.highlight .nv, .highlight .vc, .highlight .vi { color: #9cdcfe !important; } /* variable */
+.highlight .o, .highlight .ow { color: #d4d4d4 !important; }
+.highlight .mi, .highlight .mf, .highlight .m { color: #b5cea8 !important; } /* number */
+.highlight .nb { color: #4ec9b0 !important; }
+/* Copy button legibility */
+.md-typeset .md-clipboard { color: #333 !important; }
+.md-typeset .highlight .md-clipboard { color: #ccc !important; }
 
 /* Metro-divider helper */
 .md-typeset .metro-divider {
