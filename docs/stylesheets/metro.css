@@ -195,6 +195,58 @@ html, body, .md-main, .md-main__inner, .md-content, .md-typeset, .md-nav, .md-si
 .md-typeset .md-clipboard { color: #333 !important; }
 .md-typeset .highlight .md-clipboard { color: #ccc !important; }
 
+/* CONTENT SECTIONS — force good contrast for all markdown syntax (admonition, details, tabs, tables, etc.) */
+.md-typeset .admonition,
+.md-typeset details,
+.md-typeset .tabbed-set,
+.md-typeset .tabbed-content,
+.md-typeset .md-typeset__table,
+.md-typeset .critic {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #E8E8E6 !important;
+}
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background: #f8f8f6 !important;
+  color: #000000 !important;
+  border-color: #E8E8E6 !important;
+}
+.md-typeset .admonition code,
+.md-typeset details code {
+  background: #f3f3f0 !important;
+  color: #1a1a1a !important;
+}
+/* Ensure any dark-background helpers inside content are light text */
+.md-typeset .highlight,
+.md-typeset .highlight pre,
+.md-typeset .highlight code {
+  background: #121212 !important;
+  color: #f8f8f2 !important;
+}
+/* Table legibility */
+.md-typeset table:not([class]) {
+  background: #fff !important;
+}
+.md-typeset table:not([class]) th {
+  background: #f8f8f6 !important;
+  color: #000 !important;
+  border-color: #E8E8E6 !important;
+}
+.md-typeset table:not([class]) td {
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #E8E8E6 !important;
+}
+/* Fix for any remaining dark-on-dark: force content wrappers to white */
+.md-content__inner,
+.article,
+.post-content,
+.content {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
 /* Metro-divider helper */
 .md-typeset .metro-divider {
   width: 48px; height: 4px; background: var(--brand-primary); border: none; margin: 0 0 20px;
